@@ -29,7 +29,7 @@ class RegisterActivity : BaseActivity() {
 
         // Inicjalizacja pól wejściowych i przycisku rejestracji
         registerButton = findViewById(R.id.registerButton)
-        inputEmail = findViewById(R.id.inputLEmaill)
+        inputEmail = findViewById(R.id.inputLEmail)
         inputName = findViewById(R.id.inputName)
         inputPassword = findViewById(R.id.inputPassword2)
         inputRepPass = findViewById(R.id.inputPassword2repeat)
