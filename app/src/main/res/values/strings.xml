@@ -6,5 +6,7 @@
     <string name="err_msg_enter_reppassword">Please confirm your password</string>
     <string name="err_msg_password_mismatch">Passwords mismatch</string>
     <string name="register_success">You are registered succesfully</string>
+    <string name="email_text">Email</string>
+    <string name="password_text">Password</string>
 
 </resources>
