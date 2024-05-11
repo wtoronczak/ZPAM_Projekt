@@ -7,8 +7,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -65,6 +63,10 @@ class RegisterActivity : BaseActivity() {
             }
             inputPassword?.text.toString().trim {it <= ' '} != inputRepPass?.text.toString().trim{it <= ' '} -> {
                 showErrorSnackBar(resources.getString(R.string.err_msg_password_mismatch),true)
+                false
+            }
+            inputPassword?.text.toString().trim {it <= ' '}.count() < 8 -> {
+                showErrorSnackBar(resources.getString(R.string.err_msg_password_too_short),true)
                 false
             }
             else -> true

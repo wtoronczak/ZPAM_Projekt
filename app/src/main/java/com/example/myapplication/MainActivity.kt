@@ -18,11 +18,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Pobranie identyfikatora użytkownika przekazanego z poprzedniej aktywności
-        val uID = intent
-        val userID = uID.getStringExtra("uID")
+        val intent = intent
+        val userEmail = intent.getStringExtra("userEmail")
 
         // Inicjalizacja pola tekstowego powitania i ustawienie tekstu powitalnego
         welcomeTextView = findViewById(R.id.welcomeText)
-        welcomeTextView?.text = "Welcome ${userID}!";
+        welcomeTextView?.text = "Welcome ${userEmail}!";
     }
 }

@@ -98,15 +98,15 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     }
 
     /**
-     * Metoda przechodzenia do głównej aktywności po pomyślnym zalogowaniu i przekazanie uid do głównej aktywności.
+     * Metoda przechodzenia do głównej aktywności po pomyślnym zalogowaniu i przekazanie email do głównej aktywności.
      */
     fun goToMainActivity() {
 
         val user = FirebaseAuth.getInstance().currentUser;
-        val uid = user?.email.toString()
+        val userEmail = user?.email.toString()
 
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("uID",uid)
+        intent.putExtra("userEmail",userEmail)
         startActivity(intent)
     }
 
