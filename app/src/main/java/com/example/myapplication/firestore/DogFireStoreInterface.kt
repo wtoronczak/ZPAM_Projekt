@@ -6,6 +6,6 @@ interface DogFireStoreInterface {
     suspend fun deleteDog (dogId : String)
     suspend fun editDog (dog: DogFirestore)
     suspend fun getByDogId (dogId: String): DogFirestore?
-    fun getAllUserDogs (userEmail: String): MutableList<DogFirestore>
+    suspend fun getAllUserDogs (userEmail: String): List<DogFirestore>
 
 }
