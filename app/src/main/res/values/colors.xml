@@ -11,6 +11,7 @@
     <color name="dark_green">#065C38</color>
     <color name="gray">#D9D9D9</color>
     <color name="red">#DC8181</color>
+    <color name="purple">#6269A6</color>
 
     <color name="colorSnackBarSuccess">#03A9F4</color>
     <color name="colorSnackBarError">#EB1B63</color>

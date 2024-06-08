@@ -39,7 +39,7 @@
         android:layout_marginTop="120dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/common_google_signin_btn_icon_light_normal" />
+        app:srcCompat="@drawable/dogovner" />
 
     <TextView
         android:id="@+id/userEmail"
@@ -49,7 +49,7 @@
         android:layout_marginTop="36dp"
         android:background="@color/red"
         android:gravity="center"
-        android:text=""
+        android:text="User Email"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/userPhoto"

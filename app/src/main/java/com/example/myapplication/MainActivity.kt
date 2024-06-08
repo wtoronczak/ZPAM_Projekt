@@ -39,27 +39,14 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        /*
-        var dogs = mutableListOf(
-            DogFirestore(name = "Burek"),
-            DogFirestore(name = "Sami"),
-            DogFirestore(name = "Reksio"),
-            DogFirestore(name = "Arsen"),
-            DogFirestore(name = "Max"),
-            DogFirestore(name = "Terminator"),
-            DogFirestore(name = "Megatron"),
-            DogFirestore(name = "Bumblebee"),
-            DogFirestore(name = "Terminator"),
-            DogFirestore(name = "Megatron"),
-            DogFirestore(name = "Bumblebee")
-        )*/
+
 
         if (userEmail != null) {
             CoroutineScope(Dispatchers.Main).launch {
                 // Pobieranie danych w wątku IO
                 var dogs = withContext(Dispatchers.IO) {
                     dogFirestoreHandler.getAllUserDogs(userEmail)
-                }
+                }.toMutableList()
 
                 // Logowanie rozmiaru listy po pobraniu danych
                 Log.d("GetAll", "${dogs.size}")
@@ -69,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                 recyclerView.adapter = adapter
             }
         } else {
-            var dogs = emptyList<DogFirestore>()
+            var dogs = mutableListOf<DogFirestore>()
             val adapter = DogAdapter(dogs)
             recyclerView.adapter = adapter
         }
