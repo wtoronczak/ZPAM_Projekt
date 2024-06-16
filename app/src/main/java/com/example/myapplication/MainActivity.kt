@@ -27,6 +27,8 @@ class MainActivity : BaseActivity() {
     private var welcomeTextView: TextView? = null
     private var addDogButton: Button? = null
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -70,29 +72,6 @@ class MainActivity : BaseActivity() {
             val adapter = DogAdapter(dogs)
             recyclerView.adapter = adapter
         }
-
-
-        setDailyReminder()
-    }
-    fun setDailyReminder() {
-        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, NotificationReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
-
-        // Set the alarm to start at 7 AM
-        val calendar = Calendar.getInstance().apply {
-            timeInMillis = System.currentTimeMillis()
-            set(Calendar.HOUR_OF_DAY, 15)
-            set(Calendar.MINUTE, 28)
-        }
-
-        // Set the alarm to repeat daily
-        alarmManager.setInexactRepeating(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            pendingIntent
-        )
     }
 
     fun goToAddDogActivity(userEmail: String?) {

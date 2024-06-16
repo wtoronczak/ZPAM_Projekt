@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         android:text="Recommended\nfeeding method"
         android:textColor="@color/dark_green"
         android:textSize="30dp"
@@ -114,6 +114,14 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/notificationButton"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
