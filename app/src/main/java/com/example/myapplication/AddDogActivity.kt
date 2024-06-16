@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.SeekBar
 import android.widget.Spinner
 import android.widget.Toast
@@ -31,6 +32,7 @@ class AddDogActivity : BaseActivity() {
     private var sportActivitySeekBar: SeekBar? = null
 
     private var submitButton: Button? = null
+    private var returnButton: ImageButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +52,11 @@ class AddDogActivity : BaseActivity() {
                 finish()
             }
         }
+
+        returnButton?.setOnClickListener{
+            goToMainActivity(userEmail)
+            finish()
+        }
     }
 
     fun setupView(){
@@ -65,6 +72,7 @@ class AddDogActivity : BaseActivity() {
         sportActivitySeekBar = findViewById(R.id.sportActivitySeekBar)
 
         submitButton = findViewById(R.id.submitButton)
+        returnButton = findViewById(R.id.returnButton)
     }
     fun setupSpinners(){
 

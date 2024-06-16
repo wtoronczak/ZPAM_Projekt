@@ -1,23 +1,23 @@
 package com.example.myapplication
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.R
-import com.example.myapplication.firestore.DogBreed
-import com.example.myapplication.firestore.DogCondition
 import com.example.myapplication.firestore.DogFirestore
 import com.example.myapplication.firestore.DogFirestoreHandler
 import com.example.myapplication.recycleView.DogAdapter
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.Calendar
 
 /**
  * Główna aktywność aplikacji, wyświetlająca powitanie użytkownika.
@@ -26,7 +26,6 @@ class MainActivity : BaseActivity() {
     private val dogFirestoreHandler = DogFirestoreHandler()
     private var welcomeTextView: TextView? = null
     private var addDogButton: Button? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +45,6 @@ class MainActivity : BaseActivity() {
             goToAddDogActivity(userEmail)
             finish()
         }
-
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
 
@@ -74,23 +72,28 @@ class MainActivity : BaseActivity() {
         }
 
 
-
-
-
-        // Testowe działania
-        //Add
-        /*
-        if(userEmail != null){
-            val dog1 = DogFirestore("Reksio",1,5.0,DogBreed.huge,DogCondition.skinny,1,false,false,"", userEmail)
-            GlobalScope.launch(Dispatchers.Main) {
-                // Dodanie psa do bazy danych Firestore
-                dogFirestoreHandler.addDog(dog1)
-            }
-        }
-        */
-
+        setDailyReminder()
     }
+    fun setDailyReminder() {
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, NotificationReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 
+        // Set the alarm to start at 7 AM
+        val calendar = Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, 15)
+            set(Calendar.MINUTE, 28)
+        }
+
+        // Set the alarm to repeat daily
+        alarmManager.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            pendingIntent
+        )
+    }
 
     fun goToAddDogActivity(userEmail: String?) {
         val intent = Intent(this, AddDogActivity::class.java)

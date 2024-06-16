@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
  */
 class LoginActivity : BaseActivity(), View.OnClickListener {
 
+
     private var inputEmail: EditText? = null
     private var inputPassword: EditText? = null
     private var loginButton: Button? = null

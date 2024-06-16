@@ -1,19 +1,25 @@
 package com.example.myapplication.recycleView
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.myapplication.AddDogActivity
+import com.example.myapplication.DogFeedMethodActivity
 import com.example.myapplication.R
 import com.example.myapplication.firestore.DogFirestore
 import com.example.myapplication.firestore.DogFirestoreHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+
 
 class DogAdapter(val dogList: MutableList<DogFirestore>) : RecyclerView.Adapter<DogAdapter.DogViewHolder>(){
 
@@ -46,6 +52,16 @@ class DogAdapter(val dogList: MutableList<DogFirestore>) : RecyclerView.Adapter<
 
         holder.deleteButton.setOnClickListener {
             removeDog(currentDog)
+        }
+
+        holder.textView.setOnClickListener {
+            val context = it.context
+
+            val intent = Intent(context, DogFeedMethodActivity::class.java).apply {
+                putExtra("dogId", currentDog.dogId)
+                putExtra("userEmail",currentDog.userEmail)
+            }
+            context.startActivity(intent)
         }
     }
 
