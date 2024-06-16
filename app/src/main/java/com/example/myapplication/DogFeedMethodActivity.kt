@@ -62,11 +62,12 @@ class DogFeedMethodActivity : BaseActivity() {
         val dogId = intent.getStringExtra("dogId")
 
         setupView()
-
+        //przycisk cofania
         returnButton?.setOnClickListener{
             goToMainActivity(userEmail)
             finish()
         }
+        //pobranie psa, następnie wyliczenie karmy i odświeżenie widoku
         if(dogId != null){
             GlobalScope.launch(Dispatchers.Main) {
                 val dog = dogFirestoreHandler.getByDogId(dogId)
@@ -76,9 +77,9 @@ class DogFeedMethodActivity : BaseActivity() {
                 }
             }
         }
-
+        //dodanie kanału
         createNotificationChannel(this)
-
+        //sprawdzenie czy wersja jest odpowiednia i uprawnienia
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             when {
                 ContextCompat.checkSelfPermission(
@@ -160,7 +161,7 @@ class DogFeedMethodActivity : BaseActivity() {
         if(frequency == 3) hours = listOf(7,13,19)
         if(frequency == 4) hours = listOf(7,11,15,19)
 
-        // Z czata wzięte
+        // mapowanie listy intów na odpowiadające godziny (wzięto z Chatgpt)
         val today = LocalDateTime.now().toLocalDate()
         val dates = hours.map { LocalDateTime.of(today, LocalTime.of(it, 0)) }
 
@@ -172,13 +173,16 @@ class DogFeedMethodActivity : BaseActivity() {
         portionValueTextView?.text = dogFeedContext.gramsPerDay.toString()
         frequencyValueTextView?.text = dogFeedContext.feedingFrequency.toString()
 
+
+        // formatowanie z daty na tekst godzin karmienia
         val formatter = DateTimeFormatter.ofPattern("HH:mm")
         var hoursAsString = ""
         for(datetime in dogFeedContext.feedingHours){
             hoursAsString += formatter.format(datetime)
+            //\n nowa linia
             hoursAsString += "\n"
         }
-        hoursAsString.removeSuffix("\n")
+        hoursAsString.removeSuffix("\n") // usunięcie ostatniego
         hoursValueTextView?.text = hoursAsString
     }
 

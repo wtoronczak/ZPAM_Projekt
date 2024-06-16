@@ -20,7 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-
+// Adapter do RecycleView
 class DogAdapter(val dogList: MutableList<DogFirestore>) : RecyclerView.Adapter<DogAdapter.DogViewHolder>(){
 
     private val dogFirestoreHandler = DogFirestoreHandler()
@@ -45,7 +45,7 @@ class DogAdapter(val dogList: MutableList<DogFirestore>) : RecyclerView.Adapter<
         holder.textView.text = currentDog.name
 
         if(currentDog.photoUrl != ""){
-            Glide.with(holder.itemView.context)
+            Glide.with(holder.itemView.context) // Glide- ładowanie zdjęcia z internetu
                 .load(currentDog.photoUrl)
                 .into(holder.imageView)
         }
@@ -72,7 +72,7 @@ class DogAdapter(val dogList: MutableList<DogFirestore>) : RecyclerView.Adapter<
                 //Usuniecie psa z bazy danych Firestore
                 dogFirestoreHandler.deleteDog(dog.dogId)
             }
-
+            // z widocznej listy też się usuwa
             dogList.removeAt(position)
             notifyItemRemoved(position)
         }

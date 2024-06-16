@@ -18,8 +18,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class AddDogActivity : BaseActivity() {
-    private val dogFirestoreHandler = DogFirestoreHandler()
-
+    private val dogFirestoreHandler = DogFirestoreHandler() //zapytania do bazy danych
+//spiner = dropdown
     private var breedSpinner: Spinner? = null
     private var conditionSpinner : Spinner? = null
     private var sexSpinner : Spinner? = null
@@ -28,7 +28,7 @@ class AddDogActivity : BaseActivity() {
     private var nameEditText: EditText? = null
     private var weightEditText: EditText? = null
     private var ageEditText: EditText? = null
-
+//seekbar = pasek do przesuwania dog activity 1-5
     private var sportActivitySeekBar: SeekBar? = null
 
     private var submitButton: Button? = null
@@ -38,7 +38,7 @@ class AddDogActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_dog)
 
-        val intent = intent
+        val intent = intent  // intent wykorzystywany do przesyłania danych pomiędzy aktywnościami
         val userEmail = intent.getStringExtra("userEmail")
 
         setupView()
@@ -78,7 +78,9 @@ class AddDogActivity : BaseActivity() {
 
         //Breed dog spinner
         val breedOptions = arrayOf("Select Breed", "small", "medium", "big", "huge")
+        //adapter przechowuje dane o dropdownie
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, breedOptions)
+        //przypisanie widoku customowego do adaptera - wycentrowanie
         adapter.setDropDownViewResource(R.layout.spiner_view_design)
 
         breedSpinner?.adapter = adapter
@@ -107,7 +109,7 @@ class AddDogActivity : BaseActivity() {
         isPregnantSpinner?.adapter = isPregnantSpinnerAdapter
     }
     fun addDog(userEmail: String?): Boolean{
-        // get string values
+        // pobranie wartości w stringach
         val nameStr = nameEditText?.text.toString()
         val ageStr = ageEditText?.text.toString()
         val weightStr = weightEditText?.text.toString()
@@ -119,7 +121,7 @@ class AddDogActivity : BaseActivity() {
 
         val sportActivity = sportActivitySeekBar?.progress ?: 0
 
-        //validate and convert
+        //walidacja danych i konwetowanie na odpowiednie typy
 
         if(nameStr.isBlank()){
             Toast.makeText(this,"Dog name can't be empty",Toast.LENGTH_SHORT).show()
@@ -136,13 +138,13 @@ class AddDogActivity : BaseActivity() {
             Toast.makeText(this, "Weight can't be empty", Toast.LENGTH_SHORT).show()
             return false
         }
-        val weight = ageStr.toDouble()
+        val weight = weightStr.toDouble()
 
         if (breedStr.isBlank()) {
             Toast.makeText(this, "Breed can't be empty", Toast.LENGTH_SHORT).show()
             return false
         }
-
+        // sprawdzenie czy wartości są zdefiniowane w enum class
         val breed = try {
             DogBreed.valueOf(breedStr)
         } catch (e: IllegalArgumentException) {
@@ -182,7 +184,7 @@ class AddDogActivity : BaseActivity() {
         }
 
 
-        //create dog object
+        //create dog object -
         val dog = DogFirestore(nameStr, age, weight, breed, condition, sportActivity + 1, isPregnant, isMale, "", userEmail)
 
 

@@ -8,9 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import com.google.firebase.auth.FirebaseAuth
 
-/**
- * Aktywność obsługująca logowanie użytkownika za pomocą Firebase Authentication.
- */
+//logowanie
 class LoginActivity : BaseActivity(), View.OnClickListener {
 
 
@@ -47,10 +45,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    /**
-     * Metoda walidująca wprowadzone dane logowania.
-     * @return True, jeśli dane są poprawne, w przeciwnym razie False.
-     */
+   //walidacja
     private fun validateLoginDetails(): Boolean {
 
         return when{
@@ -73,9 +68,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
 
     }
 
-    /**
-     * Metoda logowania zarejestrowanego użytkownika za pomocą Firebase Authentication.
-     */
+  //logowanie użytkownika
     private fun logInRegisteredUser(){
 
 
@@ -98,9 +91,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    /**
-     * Metoda przechodzenia do głównej aktywności po pomyślnym zalogowaniu i przekazanie email do głównej aktywności.
-     */
+ //przejście do głównej aktywności po zalogowaniu
     fun goToMainActivity() {
 
         val user = FirebaseAuth.getInstance().currentUser;

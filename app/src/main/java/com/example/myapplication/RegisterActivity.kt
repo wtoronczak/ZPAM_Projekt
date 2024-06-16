@@ -10,9 +10,8 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
-/**
- * Aktywność rejestracji użytkownika.
- */
+// rejestracja użytkownika
+
 class RegisterActivity : BaseActivity() {
 
     private var registerButton: Button? = null
@@ -38,10 +37,7 @@ class RegisterActivity : BaseActivity() {
         }
     }
 
-    /**
-     * Metoda walidująca wprowadzone dane rejestracji.
-     * @return True, jeśli dane są poprawne, w przeciwnym razie False.
-     */
+   //walidacja
     private fun validateRegisterDetails(): Boolean {
 
         return when{
@@ -73,18 +69,17 @@ class RegisterActivity : BaseActivity() {
         }
     }
 
-    /**
-     * Metoda przechodzenia do aktywności logowania.
-     */
+    //Metoda przechodzenia do aktywności logowania
+
     fun goToLogin(view: View) {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish() // finish(), po to aby użytkownik nie mógł już wrócić do aktualnej aktywności bez restartowania aplikacji
     }
 
-    /**
-     * Metoda rejestracji użytkownika za pomocą Firebase Authentication.
-     */
+
+     // Metoda rejestracji do Firebase
+
     private fun registerUser(){
         if (validateRegisterDetails()){
             val login: String = inputEmail?.text.toString().trim() {it <= ' '}
@@ -109,9 +104,8 @@ class RegisterActivity : BaseActivity() {
         }
     }
 
-    /**
-     * Metoda wywoływana po udanej rejestracji użytkownika wyświetlająca wiadomość Toast.
-     */
+    //Metoda wywoływana po udanej rejestracji - wyświetlenie Toast (mini komunikat)
+
     fun  userRegistrationSuccess(){
         Toast.makeText(this@RegisterActivity, resources.getString(R.string.register_success), Toast.LENGTH_LONG).show()
     }
